@@ -1,0 +1,31 @@
+{
+  "name": "backend-training",
+  "version": "1.0.0",
+  "description": "## What is Node.js?",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc",
+    "start": "node dist/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/abhijeet-successivetech/backend-training.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/abhijeet-successivetech/backend-training/issues"
+  },
+  "homepage": "https://github.com/abhijeet-successivetech/backend-training#readme",
+  "devDependencies": {
+    "@types/node": "^24.0.13",
+    "nodemon": "^3.1.10",
+    "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "@types/lodash": "^4.17.20",
+    "lodash": "^4.17.21"
+  }
+}
