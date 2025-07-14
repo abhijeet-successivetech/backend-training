@@ -64,3 +64,59 @@ npm -v
 ```
 
 
+# Installing the Latest Stable Version of Postman 
+
+## Introduction
+
+Postman is a popular API development and testing tool used by developers to build, test, and document APIs efficiently. Below are the steps to install and set up the latest stable version of Postman on Ubuntu.
+
+---
+
+## Steps to Install Postman
+
+### 1. Open a Terminal
+
+First, open your terminal to execute the installation commands.
+
+---
+
+### 2. Add the Postman Repository
+
+Add Postman's repository to your system’s sources list:
+
+```bash
+sudo sh -c 'echo "deb https://dl.pstmn.io/download/latest/linux64" > /etc/apt/sources.list.d/postman.list'
+```
+
+---
+
+### 3. Import the Postman GPG Key
+
+Import the GPG key to authenticate the Postman packages:
+
+```bash
+sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 379CE192D401AB61
+```
+
+---
+
+### 4. Update the Package List
+
+Update your system's package list to include the newly added Postman repository:
+
+```bash
+sudo apt-get update
+```
+
+---
+
+### 5. Install Postman
+
+Finally, install Postman using:
+
+```bash
+sudo apt-get install postman
+```
+## Conclusion
+
+Postman is now installed on your Ubuntu system. You can launch it from your application launcher or by running `postman` in your terminal to begin testing and managing your APIs effectively.

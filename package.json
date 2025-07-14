@@ -20,12 +20,17 @@
   },
   "homepage": "https://github.com/abhijeet-successivetech/backend-training#readme",
   "devDependencies": {
+    "@types/cookie-parser": "^1.4.9",
+    "@types/express": "^5.0.3",
     "@types/node": "^24.0.13",
     "nodemon": "^3.1.10",
+    "ts-node": "^10.9.2",
     "typescript": "^5.8.3"
   },
   "dependencies": {
     "@types/lodash": "^4.17.20",
+    "cookie-parser": "^1.4.7",
+    "express": "^5.1.0",
     "lodash": "^4.17.21"
   }
 }
