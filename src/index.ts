@@ -1,8 +1,6 @@
-import path from "path"
 import fs from "fs";
 
-
-import { add, sub, mult, div } from "./lib/math";
+import { add, sub, mult, div } from "./lib/math.js";
 
 const [input1, input2] = process.argv.slice(2);
 
@@ -14,17 +12,18 @@ const multiplication = mult(number1, number2);
 const subtraction = sub(number1, number2);
 const division = div(number1, number2);
 
-const csvHeader = "Operation,Number1,Number2,result \n";
+const csvHeader = "All of the operation are in math.js is written below: \n";
 
 const csvFile = [
-  `Addition,${number1},${number2},${addition}`,
-  `Subtraction,${number1},${number2},${subtraction}`,
-  `Multiplication,${number1},${number2},${multiplication}`,
-  `Division,${number1},${number2},${division}`,
+  `Addition of the ${number1} and ${number2} is ${addition}`,
+  `Subtraction of the  ${number1} and ${number2}  is ${subtraction}`,
+  `Multiplication of the ${number1} and ${number2} is ${multiplication}`,
+  `Division of the ${number1} and ${number2} is ${division}`,
 ];
 
 const csvContent = csvHeader + csvFile.join("\n");
-const filePath = path.resolve("result.csv");
+
+const filePath = "./result.csv"; 
 
 fs.writeFileSync(filePath, csvContent, "utf8");
 
