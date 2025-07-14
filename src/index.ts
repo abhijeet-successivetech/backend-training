@@ -16,7 +16,7 @@ const csvHeader = "All of the operation are in math.js is written below: \n";
 
 const csvFile = [
   `Addition of the ${number1} and ${number2} is ${addition}`,
-  `Subtraction of the  ${number1} and${number2}  is ${subtraction}`,
+  `Subtraction of the  ${number1} and ${number2}  is ${subtraction}`,
   `Multiplication of the ${number1} and ${number2} is ${multiplication}`,
   `Division of the ${number1} and ${number2} is ${division}`,
 ];

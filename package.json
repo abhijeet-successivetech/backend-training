@@ -3,11 +3,11 @@
   "version": "1.0.0",
   "description": "## What is Node.js?",
   "main": "index.js",
-  "type":"module",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc",
-    "start": "node dist/index.js"
+    "start": "node dist/index.js",
+    "dev":"nodemon --exec tsx src/index.ts"
   },
   "repository": {
     "type": "git",
@@ -21,12 +21,14 @@
   },
   "homepage": "https://github.com/abhijeet-successivetech/backend-training#readme",
   "devDependencies": {
-    "@types/node": "^24.0.13",
-    "nodemon": "^3.1.10",
-    "typescript": "^5.8.3"
+    "@types/node": "24.0.13",
+    "nodemon": "3.1.10",
+    "ts-node": "10.9.2",
+    "typescript": "5.8.3",
+    "tsx": "4.20.3"
   },
   "dependencies": {
-    "@types/lodash": "^4.17.20",
-    "lodash": "^4.17.21"
+    "@types/lodash": "4.17.20",
+    "lodash": "4.17.21"
   }
 }
