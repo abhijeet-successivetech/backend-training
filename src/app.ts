@@ -1,21 +1,31 @@
-import express from "express";
-import { mockList } from "./mockList.js";
+import express, { Request, Response, NextFunction } from "express";
+import logger from "./middleware/logger.js";
+import routes from "./routes/index.js";
+import dotenv from "dotenv";
+import ErrorHandler from "./middleware/errorHandler.js";
+dotenv.config();
 
 interface Item {
   id: number;
-  name:string
+  name: string;
   address: string;
-  
 }
-
-const data: Item[] = mockList;
-
 const app = express();
-const PORT = 3000;
+app.use(express.json());
+app.set("trust-proxy", true);
 
-app.get("/", (req, res) => {
-  res.json(data);
-});
+
+
+const PORT = 8008;
+
+app.use(logger);  
+app.use(routes);
+
+
+
+
+app.use(ErrorHandler);
+
 
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
