@@ -2,12 +2,12 @@
   "name": "backend-training",
   "version": "1.0.0",
   "description": "## What is Node.js?",
-  "main": "index.js",
+  "main": "app.ts",
   "type": "module",
   "scripts": {
     "build": "tsc",
-    "start": "node dist/index.js",
-    "dev": "nodemon --exec tsx src/index.ts"
+    "start": "node dist/app.js",
+    "dev": "nodemon --exec tsx src/app.ts"
   },
   "repository": {
     "type": "git",
@@ -21,7 +21,9 @@
   },
   "homepage": "https://github.com/abhijeet-successivetech/backend-training#readme",
   "devDependencies": {
+    "@types/dotenv": "^6.1.1",
     "@types/express": "^5.0.3",
+    "@types/jsonwebtoken": "^9.0.10",
     "@types/node": "24.0.13",
     "nodemon": "3.1.10",
     "ts-node": "10.9.2",
@@ -30,8 +32,11 @@
   },
   "dependencies": {
     "@types/lodash": "4.17.20",
+    "chance": "^1.1.13",
     "cookie-parser": "^1.4.7",
+    "dotenv": "^17.2.0",
     "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
     "lodash": "4.17.21"
   }
 }
