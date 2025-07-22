@@ -5,7 +5,10 @@ dotenv.config();
 
 const SECRET_KEY = process.env.JWT_SECRET || "defaultsecret";
 
-const user = { id: 1, username: "testuser" };
+export  const generateTokens = (mail: string) => {
+  const user = {usermail: mail };
 
-const token = jwt.sign(user, SECRET_KEY, { expiresIn: "1h" });
-console.log("Generated JWT Token:", token);
+  const token = jwt.sign(user, SECRET_KEY, { expiresIn: "1h" });
+  console.log("Generated JWT Token:", token);
+  return token;
+};
