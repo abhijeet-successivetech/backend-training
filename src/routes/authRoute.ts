@@ -9,6 +9,6 @@ const router = Router();
 router.post("/registerjoi",validateUser, registerUser);
 
 router.post("/register",dynamicValidate, registerUser);
-router.post("/login",dynamicValidate,authenticateJWT,loginUser);
+router.post("/login",dynamicValidate,loginUser);
 
 export default router;
