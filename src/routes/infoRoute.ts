@@ -7,7 +7,7 @@ import { validateParam } from "../middleware/validateParams";
 
 const router = Router();
 
-router.get("/protected", authenticateJWT, (_: Request, res: Response) => {
+router.get("/protected", authenticateJWT, (req: Request, res: Response) => {
   res.send("Access token is valid.");
 });
 
@@ -15,12 +15,12 @@ router.get(
   "/custom",
   authenticateJWT,
   customHeaderMiddleware("X-Custom", "Custom-value"),
-  (_: Request, res: Response) => {
+  (req: Request, res: Response) => {
     res.send("Custom header route.");
   }
 );
 
-router.get("/logger", authenticateJWT, (_: Request, res: Response) => {
+router.get("/logger", authenticateJWT, (req: Request, res: Response) => {
   res.send("Logger route accessed.");
 });
 
