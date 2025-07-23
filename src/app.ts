@@ -21,10 +21,6 @@ const PORT = 8008;
 app.use(logger);  
 app.use("/api/v1/",routes);
 
-
-
-
-
 app.use(ErrorHandler);
 
 

@@ -5,10 +5,9 @@ interface ErrorType extends Error {
 }
 
 const ErrorHandler = (err: ErrorType, req: Request, res: Response, next:NextFunction) => {
-    console.log("Middleware Error Hadnling");
     const errStatus = err.statusCode || 500;
     const errMsg = err.message || 'Something went wrong';
-    res.status(errStatus).json({
+    return res.status(errStatus).json({
         success: false,
         status: errStatus,
         message: errMsg,

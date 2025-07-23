@@ -3,6 +3,7 @@ import authenticateJWT from "../middleware/auth";
 import { customHeaderMiddleware } from "../middleware/customHeader";
 import { validateNumericParam } from "../middleware/numericParam";
 import { validateGeoLocation } from "../middleware/validateGeolocation";
+import { validateParam } from "../middleware/validateParams";
 
 const router = Router();
 
@@ -38,5 +39,7 @@ router.get("/secure-data",
     res.json({ message: "Welcome from India!" });
   }
 );
+
+router.get("/get-info",authenticateJWT, validateParam); // I  will use for check-param validation
 
 export default router;
