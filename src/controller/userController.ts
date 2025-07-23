@@ -41,8 +41,8 @@ export const loginUser = (req: Request , res: Response) => {
             message: "Enter correct email and password"
         })
     };
-    generateTokens(email)
+    const jToken = generateTokens(email)
     res.send(200).json({
-        messsage: "logged in"
+        messsage: `logged in and your token is = ${jToken}`
     })
 };

@@ -4,7 +4,7 @@ interface ErrorType extends Error {
   statusCode?: number;
 }
 
-const ErrorHandler = (err: ErrorType, req: Request, res: Response) => {
+const ErrorHandler = (err: ErrorType, req: Request, res: Response, next:NextFunction) => {
     console.log("Middleware Error Hadnling");
     const errStatus = err.statusCode || 500;
     const errMsg = err.message || 'Something went wrong';

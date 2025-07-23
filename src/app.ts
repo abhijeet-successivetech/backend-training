@@ -19,7 +19,7 @@ app.set("trust-proxy", true);
 const PORT = 8008;
 
 app.use(logger);  
-app.use(routes);
+app.use("/api/v1/",routes);
 
 
 
