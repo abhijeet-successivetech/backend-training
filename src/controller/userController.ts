@@ -24,7 +24,7 @@ export const registerUser = (req: Request , res: Response) => {
     }
     if(!exist){
     userList.push({username,gender,age,email,password});
-    res.send(201).json({
+    res.status(201).json({
         message: "User registered successfuly"
     })
     }
@@ -42,7 +42,8 @@ export const loginUser = (req: Request , res: Response) => {
         })
     };
     const jToken = generateTokens(email)
-    res.send(200).json({
-        messsage: `logged in and your token is = ${jToken}`
+    res.status(200).json({
+        messsage: `logged in and your token is below`,
+        token: jToken
     })
 };
