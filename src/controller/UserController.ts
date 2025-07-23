@@ -11,7 +11,6 @@ interface User {
 
 const userList : User[] = [];
 
-
 export const registerUser = (req: Request , res: Response) => {
     const {email,password,gender,username,age} = req.body;
 
@@ -27,6 +26,7 @@ export const registerUser = (req: Request , res: Response) => {
     res.status(201).json({
         message: "User registered successfuly"
     })
+
     }
 
 };
@@ -34,16 +34,15 @@ export const registerUser = (req: Request , res: Response) => {
 export const loginUser = (req: Request , res: Response) => {
     const {email,password} = req.body;
     
-    const checkEmail = userList.find(user => user.email === email && user.password === password);
+    const checkEmail = userList.find(user => user.email === email);
 
     if(!checkEmail){
         return res.status(401).json({
             message: "Enter correct email and password"
         })
     };
-    const jToken = generateTokens(email)
+    generateTokens(email)
     res.status(200).json({
-        messsage: `logged in and your token is below`,
-        token: jToken
+        messsage: `logged in and your token is in log`,
     })
 };

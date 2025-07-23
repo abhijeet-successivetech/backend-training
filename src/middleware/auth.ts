@@ -14,7 +14,9 @@ const authenticateJWT = (
   try {
     const authHeader = req.headers.authorization;
     if (!authHeader) {
-       return res.sendStatus(401);
+       return res.status(401).json({
+        message:"Auth Header not found "
+       });
     }
     const decoded = jwt.verify(authHeader, SECRET_KEY);
     req.user = decoded; 

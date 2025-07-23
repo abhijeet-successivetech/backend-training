@@ -1,5 +1,5 @@
-import { userSchema, registerSchema } from "../models/userSchema";
+import { UserSchema, RegisterSchema } from "../utils/UserSchema";
 export const validationConfig: Record<string, any> = {
-  "/register": registerSchema,
-  "/login": userSchema,
+  "/register": RegisterSchema,
+  "/login": UserSchema,
 };

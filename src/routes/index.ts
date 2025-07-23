@@ -1,12 +1,12 @@
 import { Router } from "express";
-import authRoutes from "./authRoute";
-import mockRoutes from "./mockRoute";
-import infoRoutes from "./infoRoute";
+import authRoutes from "./auths";
+import mockRoutes from "./mocks";
+import infoRoutes from "./info-routes";
 
 const router = Router();
 
-router.use( authRoutes);     
-router.use(mockRoutes);    
-router.use(infoRoutes);           
+router.use(authRoutes);
+router.use(mockRoutes);
+router.use(infoRoutes);
 
 export default router;
