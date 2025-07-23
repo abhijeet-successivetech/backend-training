@@ -5,12 +5,11 @@ import { rateLimiterMiddleware } from "../middleware/rateLimiter.js";
 
 const router = Router();
 
-// /api/mock/mockData (GET + POST)
 router.get("/mockData", authenticateJWT, mockController);
 router.post("/mockData", rateLimiterMiddleware(3, 6), authenticateJWT, mockController);
 
-// /api/mock/mocklist
-router.get("/mocklist", authenticateJWT, (_: Request, res: Response) => {
+
+router.get("/mocklist", authenticateJWT, (req: Request, res: Response) => {
   res.sendFile(__dirname + "/../utils/mockList.ts");
 });
 
