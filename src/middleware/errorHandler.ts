@@ -4,14 +4,15 @@ interface ErrorType extends Error {
   statusCode?: number;
 }
 
-const ErrorHandler = (err: ErrorType, req: Request, res: Response, next:NextFunction) => {
+export class ErrorHandler {
+  public handle = (err: ErrorType, req: Request, res: Response, next: NextFunction): void => {
     const errStatus = err.statusCode || 500;
-    const errMsg = err.message || 'Something went wrong';
-    return res.status(errStatus).json({
-        success: false,
-        status: errStatus,
-        message: errMsg,
-    })
+    const errMsg = err.message || "Something went wrong";
 
+    res.status(errStatus).json({
+      success: false,
+      status: errStatus,
+      message: errMsg,
+    });
+  };
 }
-export default ErrorHandler

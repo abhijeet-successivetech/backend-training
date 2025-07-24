@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { generateTokens } from "../utils/generateTokens";
+import Token from "../utils/generateTokens";
 
 interface User {
   username: string;
@@ -9,46 +9,55 @@ interface User {
   password: string;
 }
 
-const userList: User[] = [];
+class AuthController {
+  private userList: User[] = [];
+  private token: Token;
 
-export const registerUser = (req: Request, res: Response) => {
-  const { email, password, gender, username, age } = req.body;
-
-  const exist = userList.find((user) => user.email === email);
-
-  if (exist) {
-    return res.status(409).json({
-      message: "User already exists",
-    });
+  public constructor() {
+    this.token = new Token();
   }
-  if (!exist) {
-    userList.push({ username, gender, age, email, password });
-    res.status(201).json({
-      message: "User registered successfuly",
-    });
-  }
-};
 
-export const loginUser = (req: Request, res: Response,next:NextFunction) => {
-  try {
-    const { email, password } = req.body;
+  public registerUser = (req: Request, res: Response) => {
+    const { email, password, gender, username, age } = req.body;
 
-    const checkEmail = userList.find(
-      (user) => user.email === email && user.password === password
-    );
+    const exist = this.userList.find((user) => user.email === email);
 
-    if (!checkEmail) {
-      return res.status(401).json({
-        message: "Enter correct email and password",
+    if (exist) {
+      return res.status(409).json({
+        message: "User already exists",
       });
     }
-    const jToken = generateTokens(email);
-    console.log("jToken", jToken);
+    if (!exist) {
+      this.userList.push({ username, gender, age, email, password });
+      res.status(201).json({
+        message: "User registered successfuly",
+      });
+    }
+  };
 
-    res.status(200).json({
-      messsage: `logged in and your token is = ${jToken}`,
-    });
-  } catch (error) {
-    next(error)
-  }
-};
+  public loginUser = (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const { email, password } = req.body;
+
+      const checkEmail = this.userList.find(
+        (user) => user.email === email && user.password === password
+      );
+
+      if (!checkEmail) {
+        return res.status(401).json({
+          message: "Enter correct email and password",
+        });
+      }
+      const jToken = this.token.generateTokens(email);
+      console.log("jToken", jToken);
+
+      res.status(200).json({
+        messsage: `logged in and your token is = ${jToken}`,
+      });
+    } catch (error) {
+      next(error);
+    }
+  };
+}
+
+export default AuthController;

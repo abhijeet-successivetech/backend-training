@@ -1,15 +1,17 @@
 import { Router, Request, Response } from "express";
-import { mockController } from "../controller/mockController.js";
-import authenticateJWT from "../middleware/auth.js";
-import { rateLimiterMiddleware } from "../middleware/rateLimiter.js";
+import { MockController } from "../controller/mockController.js";
+import { JWTAuthenticator } from "../middleware/auth.js";
+import { RateLimiterMiddleware } from "../middleware/rateLimiter.js";
 
 const router = Router();
 
-router.get("/mockData", authenticateJWT, mockController);
-router.post("/mockData", rateLimiterMiddleware(3, 6), authenticateJWT, mockController);
+const mockController  = new MockController();
+const authenticateJWT  = new JWTAuthenticator();
 
-router.get("/mocklist", authenticateJWT, (_: Request, res: Response) => {
-  res.sendFile("/home/abhijeet.kumar/Documents/training/backend-training/src/utils/mockList.ts");
-});
+const limit = new RateLimiterMiddleware();
+
+router.get("/mockData", authenticateJWT.authenticate, mockController.getMockData);
+router.post("/mockData",limit.rateLimiter(3,6), authenticateJWT.authenticate, mockController.getMockData);
+
 
 export default router;
