@@ -5,7 +5,6 @@ import CountryController from "../controller/Country.js";
 
 
 const router = Router();
-const countryController = new CountryController();
 
 router.get("/mockData", authenticateJWT, mockController);
 router.post("/mockData", authenticateJWT, mockController);
