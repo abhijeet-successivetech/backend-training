@@ -1,5 +1,3 @@
-// src/controllers/StudentController.ts
-
 import { Request, Response } from "express";
 import StudentModel, { IStudent } from "../models/Student";
 
@@ -13,7 +11,7 @@ export default class StudentController {
         return;
       }
 
-      const student = await StudentModel.create({ name, city, age });
+      const student: IStudent = await StudentModel.create({ name, city, age });
 
       res.status(201).json({
         status: true,
