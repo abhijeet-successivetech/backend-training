@@ -10,6 +10,16 @@ const validateParam   = new ParamValidator();
 router.get("/protected", authenticateJWT.authenticate, (req: Request, res: Response) => {
   res.send("Access token is valid.");
 });
+router.get('/health', (req: Request, res: Response) => {
+  const data = {
+    uptime: process.uptime(),
+    message: 'Ok',
+    date: new Date()
+  }
+
+  res.status(200).send(data);
+});
+
 
 
 
