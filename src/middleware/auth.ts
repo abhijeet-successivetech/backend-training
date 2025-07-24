@@ -6,22 +6,30 @@ dotenv.config();
 
 const SECRET_KEY = process.env.JWT_SECRET || "defaultsecret";
 
-const authenticateJWT = (
-  req: Request & { user?: string | jwt.JwtPayload },
-  res: Response,
-  next: NextFunction
-) => {
-  try {
-    const authHeader = req.headers.authorization;
-    if (!authHeader) {
-       return res.sendStatus(401);
-    }
-    const decoded = jwt.verify(authHeader, SECRET_KEY);
-    req.user = decoded; 
-    next();
-  } catch (err) {
-     next(err); 
-  }
-};
+interface AuthenticatedRequest extends Request {
+  user?: string | jwt.JwtPayload;
+}
 
-export default authenticateJWT;
+export class JWTAuthenticator {
+  public authenticate = (
+    req: AuthenticatedRequest,
+    res: Response,
+    next: NextFunction
+  ): void => {
+    try {
+      const authHeader = req.headers.authorization;
+
+      if (!authHeader) {
+        res.sendStatus(401);
+        return;
+      }
+
+      const decoded = jwt.verify(authHeader, SECRET_KEY);
+      req.user = decoded;
+
+      next();
+    } catch (err) {
+      next(err);
+    }
+  };
+}
