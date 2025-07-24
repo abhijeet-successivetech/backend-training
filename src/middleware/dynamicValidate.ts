@@ -21,5 +21,5 @@ export const dynamicValidate = (req: Request, res: Response, next: NextFunction)
   
   req.body = value; 
  
-  next();
+  return next();
 };

@@ -4,13 +4,12 @@ import geoip from "geoip-lite";
 
 export function validateGeoLocation(allowedCountry: string) {
   return (req: Request, res: Response, next: NextFunction) => {
-  
-
     
+    try{
     const reqIp = req.socket.remoteAddress;
 
     if(reqIp  === "::1"){
-      next();
+      return next();
     }
 
     const geo = reqIp?geoip.lookup(reqIp):"";
@@ -21,6 +20,10 @@ export function validateGeoLocation(allowedCountry: string) {
       });
     }
 
-    next();
+   return  next();
+  }
+  catch(error){
+    return next(error);
+  }
   };
 }

@@ -22,7 +22,7 @@ const authenticateJWT = (
     req.user = decoded; 
     next();
   } catch (err) {
-     next(err); 
+     return next(err); 
   }
 };
 
