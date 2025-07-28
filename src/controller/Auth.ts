@@ -1,62 +1,59 @@
 import { Request, Response, NextFunction } from "express";
 import User from "../models/User.js";
-import bcrypt from "bcrypt"
-import jwt from "jsonwebtoken"
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 
 dotenv.config();
 
-
-export const signup = async (req: Request, res:Response)=>{
-   
-    const {name, password , email, role } = req.body;
-    try{
-        const existUser = await User.findOne({email});
-        if(existUser){
-            return res.status(400).send({
-                success: false,
-                message:"User already exist",
-            });
-        }
-        let hashedpassword;
-        try{
-            hashedpassword = await bcrypt.hash(password,10);
-        }
-        catch(err){
-            return res.status(500).json({
-                success: false,
-                message: "Error in hashing Passwords",
-            });
-        }
-        
-        const user = await User.create({
-            name, email, password:hashedpassword, role
-        });
-
-        return res.status(200).json({
-            success:true,
-            message:'User Created Successfully'
-        });
-
-    }catch(err){
-        console.error(err);
-        return res.status(500).send({
-            success: false,
-            message:"User cannot be registered, please try again later",
-        });
-        
+export const signup = async (req: Request, res: Response) => {
+  const { name, password, email, role } = req.body;
+  try {
+    const existUser = await User.findOne({ email });
+    if (existUser) {
+      return res.status(400).json({
+        success: false,
+        message: "User already exist",
+      });
     }
-}
+    let hashedpassword;
+    try {
+      hashedpassword = await bcrypt.hash(password, 10);
+    } catch (err) {
+      return res.status(500).json({
+        success: false,
+        message: "Error in hashing Passwords",
+      });
+    }
 
+    const user = await User.create({
+      name,
+      email,
+      password: hashedpassword,
+      role,
+    });
+
+    return res.status(200).json({
+      success: true,
+      message: "User Created Successfully",
+    });
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({
+      success: false,
+      message: "User cannot be registered, please try again later",
+    });
+  }
+};
 
 export const login = async (req: Request, res: Response) => {
   const { email, password } = req.body;
 
   try {
     if (!email || !password) {
-      return res.status(401).send({
+      return res.status(401).json({
         success: false,
-        message: "Give both email as well as passwords"
+        message: "Give both email as well as passwords",
       });
     }
 
@@ -65,7 +62,7 @@ export const login = async (req: Request, res: Response) => {
     if (!existuser) {
       return res.status(401).json({
         success: false,
-        message: "User is not registered, please sign up"
+        message: "User is not registered, please sign up",
       });
     }
 
@@ -75,25 +72,26 @@ export const login = async (req: Request, res: Response) => {
       role: existuser.role,
     };
 
-    const isPasswordCorrect = await bcrypt.compare(password, existuser.password);
+    const isPasswordCorrect = await bcrypt.compare(
+      password,
+      existuser.password
+    );
     if (isPasswordCorrect) {
       const token = jwt.sign(payload, process.env.SECRET_KEY as string, {
         expiresIn: "2h",
       });
-
-      const userObj = existuser.toObject();
-      (userObj as any).token = token;
-      (userObj as any).password = undefined;
 
       const options = {
         expires: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000),
         httpOnly: true,
       };
 
+      const loggedUser = await User.findById(existuser._id).select("-password")
+
       return res.cookie("token", token, options).status(200).json({
         success: true,
         token,
-        user: userObj,
+        user: loggedUser,
         message: "User logged in successfully",
       });
     } else {

@@ -26,7 +26,7 @@ const auth = (req: Request, res: Response, next: NextFunction)=>{
             });
         }
 
-        next();
+        return next();
     }
     catch(error){
         return res.status(401).json({

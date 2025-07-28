@@ -6,7 +6,7 @@ import auth from "../middleware/auth.js";
 
 
 
-router.post("/login", login);
+router.post("/loginuser", login);
 router.post("/signup", signup);
 
 export default router;
