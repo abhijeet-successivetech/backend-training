@@ -4,7 +4,11 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-const auth = (req: Request, res: Response, next: NextFunction)=>{
+interface IPayload extends Request {
+   user:string | jwt.JwtPayload
+}
+
+const auth = (req: Request & IPayload, res: Response, next: NextFunction)=>{
     try{
         const token = req.body.token || req.cookies.token || req.header("Authorization")?.replace("Bearer ","");
 
@@ -17,7 +21,7 @@ const auth = (req: Request, res: Response, next: NextFunction)=>{
         try{
             const payload = jwt.verify(token, process.env.SECRET_KEY as string);
             console.log(payload);
-            (req as any).user = payload;
+            req.user = payload;
         }
         catch(error){
             return res.status(401).json({
