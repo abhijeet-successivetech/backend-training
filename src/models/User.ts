@@ -20,13 +20,13 @@ const UserSchema: Schema = new Schema({
   },
   password: {
     type: String,
-    min: 18,
+    min: 4,
     max: 60,
     required: true,
   },
   role: {
-     type: String,
-    min: 18,
+    type: String,
+    min: 4,
     max: 60,
     required: true,
 
