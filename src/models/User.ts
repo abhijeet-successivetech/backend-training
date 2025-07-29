@@ -1,12 +1,17 @@
+import { object } from "joi";
 import mongoose, { Schema, Document, Model } from "mongoose";
+
+enum Role  {
+  ADMIN = "admin",
+  USER = "user"
+}
 
 export interface IUser extends Document {
   name: string;
   email: string;
   password: string;
-  role: string
+  role: Role;
 }
-
 const UserSchema: Schema = new Schema({
   name: {
     type: String,
@@ -20,13 +25,14 @@ const UserSchema: Schema = new Schema({
   },
   password: {
     type: String,
-    min: 18,
+    min: 4,
     max: 60,
     required: true,
   },
   role: {
-     type: String,
-    min: 18,
+    type: String,
+    enum : Object.values(Role),
+    min: 4,
     max: 60,
     required: true,
 
