@@ -31,12 +31,20 @@
     "typescript": "5.8.3"
   },
   "dependencies": {
+    "@types/bcrypt": "^6.0.0",
+    "@types/cookie-parser": "^1.4.9",
+    "@types/geoip-lite": "^1.4.4",
     "@types/lodash": "4.17.20",
+    "bcrypt": "^6.0.0",
+    "bcrypt-ts": "^7.1.0",
     "chance": "^1.1.13",
     "cookie-parser": "^1.4.7",
     "dotenv": "^17.2.0",
     "express": "^5.1.0",
+    "geoip-lite": "^1.4.10",
+    "joi": "^17.13.3",
     "jsonwebtoken": "^9.0.2",
-    "lodash": "4.17.21"
+    "lodash": "4.17.21",
+    "mongoose": "^8.16.4"
   }
 }
