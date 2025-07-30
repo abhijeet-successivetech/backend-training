@@ -5,6 +5,7 @@ export const dynamicValidate = (req: Request, res: Response, next: NextFunction)
   const routePath = req.route?.path;
   const schema = validationConfig[routePath];
 
+  
   if (!schema) return next();
 
   const { error, value } = schema.validate(req.body, {
@@ -17,7 +18,8 @@ export const dynamicValidate = (req: Request, res: Response, next: NextFunction)
       status: false,
     });
   }
-
+  
   req.body = value; 
-  next();
+ 
+  return next();
 };

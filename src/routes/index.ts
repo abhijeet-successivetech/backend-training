@@ -1,7 +1,7 @@
 import { Router } from "express";
-import authRoutes from "./authRoute.js";
+import authRoutes from "./auths.js";
 import mockRoutes from "./mockRoute.js";
-import infoRoutes from "./infoRoute.js";
+import infoRoutes from "./info-routes.js";
 import errorRoutes from "./errorRoute.js"
 import asyncRoute from "./asyncRoute.js"
 

@@ -1,9 +1,9 @@
 import { Request, Response, NextFunction } from "express";
 
-import { userSchema } from "../models/userSchema";
+import { UserSchema } from "../utils/UserSchema";
 
 export const validateUser = (req: Request, res: Response, next: NextFunction) => {
-  const { error } = userSchema.validate(req.body);
+  const { error } = UserSchema.validate(req.body);
 
   if (error) {
     return res.status(400).json({

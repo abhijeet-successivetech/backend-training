@@ -1,5 +1,5 @@
 import { Router, Request, Response } from "express";
-import { mockController } from "../controller/mockController.js";
+import { mockController } from "../controller/MockController.js";
 import authenticateJWT from "../middleware/auth.js";
 import { rateLimiterMiddleware } from "../middleware/rateLimiter.js";
 
