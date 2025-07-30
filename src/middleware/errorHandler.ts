@@ -4,11 +4,15 @@ interface ErrorType extends Error {
   statusCode?: number;
 }
 
-const ErrorHandler = (err: ErrorType, req: Request, res: Response) => {
+const ErrorHandler = (err: ErrorType, req: Request, res: Response, next:NextFunction) => {
     console.log("Middleware Error Hadnling");
+    if (res.headersSent) {
+        console.log("Headers already sent");
+        return next(err);
+    }
     const errStatus = err.statusCode || 500;
     const errMsg = err.message || 'Something went wrong';
-    res.status(errStatus).json({
+    return res.status(errStatus).json({
         success: false,
         status: errStatus,
         message: errMsg,
