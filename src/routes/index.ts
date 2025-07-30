@@ -1,12 +1,16 @@
 import { Router } from "express";
-import authRoutes from "./auths";
-import mockRoutes from "./mocks";
-import infoRoutes from "./info-routes";
+import authRoutes from "./auths.js";
+import mockRoutes from "./mockRoute.js";
+import infoRoutes from "./info-routes.js";
+import errorRoutes from "./errorRoute.js"
+import asyncRoute from "./asyncRoute.js"
 
 const router = Router();
 
-router.use(authRoutes);
-router.use(mockRoutes);
-router.use(infoRoutes);
+router.use( authRoutes);     
+router.use(mockRoutes);    
+router.use(infoRoutes);       
+router.use(errorRoutes);
+router.use(asyncRoute);
 
 export default router;
