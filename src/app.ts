@@ -5,12 +5,15 @@ import dotenv from "dotenv";
 import ErrorHandler from "./middleware/errorHandler.js";
 import { customHeaderMiddleware } from "./middleware/customHeader.js";
 import { rateLimiterMiddleware } from "./middleware/rateLimiter.js";
+import { dbConnect } from "./config/databaseConfig.js";
 
 dotenv.config();
 
 const app = express();
 app.use(express.json());
 app.set("trust-proxy", true);
+
+dbConnect();
 
 const PORT = 8008;
 
